@@ -13,15 +13,20 @@ import 'package:ovqatlar_menyusi/theme/theme_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
+  // ✅ WidgetsFlutterBinding.ensureInitialized() - MAJBURIY
   WidgetsFlutterBinding.ensureInitialized();
-  // init notification
-  NotificationService().initNotification();
+
+  // ✅ Notification init
+  await NotificationService().initNotification();
+
+  // ✅ ThemeProvider yaratish
+  final themeProvider = ThemeProvider();
+
+  // ✅ Theme ni yuklash
+  await themeProvider.loadTheme();
 
   runApp(
-    ChangeNotifierProvider(
-      create: (ctx) => ThemeProvider(),
-      child: const App(),
-    ),
+    ChangeNotifierProvider.value(value: themeProvider, child: const App()),
   );
 }
 
@@ -34,7 +39,6 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   final _categoryModel = Categories();
-
   final _mealModel = Meals();
 
   void _toggleLike(String mealId) {
@@ -62,22 +66,45 @@ class _AppState extends State<App> {
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+
+    // ✅ Loading holatini tekshirish
+    if (themeProvider.isLoading) {
+      return MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: Scaffold(
+          backgroundColor: themeProvider.isDarkMode
+              ? const Color(0xFF121212)
+              : Colors.white,
+          body: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(
+                  color: themeProvider.isDarkMode
+                      ? Colors.blue[200]
+                      : Colors.amber,
+                ),
+                const SizedBox(height: 20),
+                Text(
+                  'Mavzu yuklanmoqda...',
+                  style: GoogleFonts.adventPro(
+                    color: themeProvider.isDarkMode
+                        ? Colors.white70
+                        : Colors.black87,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+    }
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: themeProvider.lightTheme, // light theme
-      darkTheme: themeProvider.darkTheme, // dark theme
+      theme: themeProvider.lightTheme,
+      darkTheme: themeProvider.darkTheme,
       themeMode: themeProvider.themeMode,
-      // ThemeData(
-      //   primarySwatch: Colors.amber,
-      //   fontFamily: GoogleFonts.adventPro().fontFamily,
-      //   useMaterial3: false,
-      // ),
-
-      // home: CategoriesScreen(
-      //   categories: _categoryModel.list,
-      //   meals: _mealModel.list,
-      // ),
-      // initialRoute: TabsScreen.routeName,
       initialRoute: SplashScreen.routeName,
       routes: {
         TabsScreen.routeName: (ctx) => TabsScreen(
@@ -97,7 +124,7 @@ class _AppState extends State<App> {
           categories: _categoryModel.list,
           addFunction: _addNewMeal,
         ),
-        SplashScreen.routeName: (ctx) => SplashScreen(),
+        SplashScreen.routeName: (ctx) => const SplashScreen(),
       },
     );
   }
