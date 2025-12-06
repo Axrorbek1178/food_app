@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:ovqatlar_menyusi/screens/products_screen.dart';
 import 'package:ovqatlar_menyusi/screens/tabs_screen.dart';
+import 'package:ovqatlar_menyusi/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 class MainDrawer extends StatelessWidget {
   const MainDrawer({super.key});
@@ -21,7 +23,7 @@ class MainDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    bool isDark = Theme.of(context).brightness == Brightness.dark;
+    final themeProvider = Provider.of<ThemeProvider>(context);
 
     return Drawer(
       child: Column(
@@ -45,13 +47,16 @@ class MainDrawer extends StatelessWidget {
           const Divider(height: 0),
           _buildMenuItem(
             "Dark Mode",
-            Icons.dark_mode,
+
+            themeProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
             () {},
             Switch(
-              value: isDark,
+              value: themeProvider.isDarkMode,
               onChanged: (value) {
-                //
+                // Switch bosilganda:
+                themeProvider.toggleTheme(value);
               },
+              activeThumbColor: Theme.of(context).primaryColor,
             ),
           ),
         ],

@@ -9,13 +9,20 @@ import 'package:ovqatlar_menyusi/screens/products_screen.dart';
 import 'package:ovqatlar_menyusi/screens/splash_screen.dart';
 import 'package:ovqatlar_menyusi/screens/tabs_screen.dart';
 import 'package:ovqatlar_menyusi/service/notification_service.dart';
+import 'package:ovqatlar_menyusi/theme/theme_provider.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   // init notification
   NotificationService().initNotification();
 
-  runApp(const App());
+  runApp(
+    ChangeNotifierProvider(
+      create: (ctx) => ThemeProvider(),
+      child: const App(),
+    ),
+  );
 }
 
 class App extends StatefulWidget {
@@ -54,13 +61,17 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.amber,
-        fontFamily: GoogleFonts.adventPro().fontFamily,
-        useMaterial3: false,
-      ),
+      theme: themeProvider.lightTheme, // light theme
+      darkTheme: themeProvider.darkTheme, // dark theme
+      themeMode: themeProvider.themeMode,
+      // ThemeData(
+      //   primarySwatch: Colors.amber,
+      //   fontFamily: GoogleFonts.adventPro().fontFamily,
+      //   useMaterial3: false,
+      // ),
 
       // home: CategoriesScreen(
       //   categories: _categoryModel.list,
