@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:ovqatlar_menyusi/models/category.dart';
 import 'package:ovqatlar_menyusi/models/meal.dart';
+import 'package:ovqatlar_menyusi/service/notification_service.dart';
 import 'package:ovqatlar_menyusi/widgets/custom_input_image.dart';
 
 class AddNewProductScreen extends StatefulWidget {
@@ -87,7 +88,18 @@ class _AddNewProductScreenState extends State<AddNewProductScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Yangi Ovqat'),
-        actions: [IconButton(onPressed: _save, icon: Icon(Icons.save))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              _save();
+              NotificationService().showNotification(
+                title: 'Yangi ovqat qo\'shildi',
+                body: 'Siz yangi ovqatni muvaffaqiyatli qo\'shdingiz!',
+              );
+            },
+            icon: Icon(Icons.save),
+          ),
+        ],
       ),
       body: SingleChildScrollView(
         child: Padding(

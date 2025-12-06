@@ -148,7 +148,7 @@ class Meals {
     ),
   ];
 
-  List<Meal> _favorites = [];
+  final List<Meal> _favorites = [];
 
   List<Meal> get list {
     return _list;

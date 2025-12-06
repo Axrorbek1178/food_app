@@ -6,9 +6,15 @@ import 'package:ovqatlar_menyusi/screens/add_new_product_screen.dart';
 import 'package:ovqatlar_menyusi/screens/category_meals.dart';
 import 'package:ovqatlar_menyusi/screens/meal_details_screen.dart';
 import 'package:ovqatlar_menyusi/screens/products_screen.dart';
+import 'package:ovqatlar_menyusi/screens/splash_screen.dart';
 import 'package:ovqatlar_menyusi/screens/tabs_screen.dart';
+import 'package:ovqatlar_menyusi/service/notification_service.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  // init notification
+  NotificationService().initNotification();
+
   runApp(const App());
 }
 
@@ -55,11 +61,13 @@ class _AppState extends State<App> {
         fontFamily: GoogleFonts.adventPro().fontFamily,
         useMaterial3: false,
       ),
+
       // home: CategoriesScreen(
       //   categories: _categoryModel.list,
       //   meals: _mealModel.list,
       // ),
-      initialRoute: TabsScreen.routeName,
+      // initialRoute: TabsScreen.routeName,
+      initialRoute: SplashScreen.routeName,
       routes: {
         TabsScreen.routeName: (ctx) => TabsScreen(
           categories: _categoryModel.list,
@@ -78,6 +86,7 @@ class _AppState extends State<App> {
           categories: _categoryModel.list,
           addFunction: _addNewMeal,
         ),
+        SplashScreen.routeName: (ctx) => SplashScreen(),
       },
     );
   }
