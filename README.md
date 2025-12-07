@@ -6,6 +6,8 @@
 <img width="1290" height="2796" alt="Simulator Screenshot - iPhone 16 Plus - 2025-12-07 at 23 08 54" src="https://github.com/user-attachments/assets/028bf499-237c-457b-b6fe-968c0dc89589" />
 <img width="1290" height="2796" alt="Simulator Screenshot - iPhone 16 Plus - 2025-12-07 at 23 09 09" src="https://github.com/user-attachments/assets/a8c7a8c6-3fa2-45e9-9de5-93a93b1520e7" />
 <img width="1290" height="2796" alt="Simulator Screenshot - iPhone 16 Plus - 2025-12-07 at 23 10 36" src="https://github.com/user-attachments/assets/f1ff766d-84cb-4d33-a036-8f7cf00975f9" />
+<img width="1290" height="2796" alt="Simulator Screenshot - iPhone 16 Plus - 2025-12-07 at 23 08 31" src="https://github.com/user-attachments/assets/373816f2-093b-49db-9165-10715cc05f54" />
+
 
 
 ## Getting Started
