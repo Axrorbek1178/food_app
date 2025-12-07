@@ -51,6 +51,8 @@ class MainDrawer extends StatelessWidget {
             themeProvider.isDarkMode ? Icons.dark_mode : Icons.light_mode,
             () {},
             Switch(
+              activeTrackColor: ThemeData.dark().colorScheme.secondary,
+              inactiveThumbColor: ThemeData.light().primaryColor,
               value: themeProvider.isDarkMode,
               onChanged: (value) {
                 // Switch bosilganda:

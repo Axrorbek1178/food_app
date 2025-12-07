@@ -200,7 +200,7 @@ class ThemeProvider with ChangeNotifier {
 
   // DARK MODE
   ThemeData get darkTheme => ThemeData.dark().copyWith(
-    primaryColor: const Color.fromARGB(255, 58, 90, 117),
+    primaryColor: Colors.black12.withAlpha(150),
     scaffoldBackgroundColor: const Color(0xFF121212),
     appBarTheme: AppBarTheme(
       backgroundColor: const Color(0xFF1E1E1E),
@@ -274,8 +274,8 @@ class ThemeProvider with ChangeNotifier {
     dividerColor: Colors.grey[700],
     elevatedButtonTheme: ElevatedButtonThemeData(
       style: ElevatedButton.styleFrom(
-        backgroundColor: const Color.fromARGB(255, 58, 90, 117),
-        foregroundColor: Colors.white,
+        backgroundColor: const Color(0xFF1E1E1E),
+        foregroundColor: Colors.white70,
         textStyle: GoogleFonts.adventPro(
           fontSize: 14,
           fontWeight: FontWeight.w600,
@@ -283,17 +283,14 @@ class ThemeProvider with ChangeNotifier {
       ),
     ),
     floatingActionButtonTheme: FloatingActionButtonThemeData(
-      backgroundColor: const Color.fromARGB(255, 58, 90, 117),
+      backgroundColor: const Color(0xFF1E1E1E),
       foregroundColor: Colors.white,
     ),
     bottomNavigationBarTheme: BottomNavigationBarThemeData(
       backgroundColor: const Color(0xFF1E1E1E),
-      selectedItemColor: const Color.fromARGB(255, 58, 90, 117),
+      selectedItemColor: const Color(0xFF1E1E1E),
       unselectedItemColor: Colors.grey[500],
     ),
-    buttonTheme: ButtonThemeData(
-      buttonColor: const Color.fromARGB(255, 58, 90, 117),
-      textTheme: ButtonTextTheme.primary,
-    ),
+    buttonTheme: ButtonThemeData(buttonColor: Colors.white70),
   );
 }
